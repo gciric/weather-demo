@@ -1,0 +1,42 @@
+﻿@model EuropeWeather.DataAccess.Countries
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Countries</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Code2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Code2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Code3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Code3)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CountryId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

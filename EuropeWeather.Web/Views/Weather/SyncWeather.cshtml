@@ -1,0 +1,32 @@
+﻿@model EuropeWeather.Web.Models.WeatherSyncModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Sync Weather";
+}
+
+<h2>Sync Weather</h2>
+
+<div>
+    <h4>Weather Sync Result</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Success)
+        </dt>
+
+        <dd>
+            @Html.LabelFor(model => model.Success)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Message)
+        </dt>
+
+        <dd>
+            @Html.LabelFor(model => model.Message)
+        </dd>
+    </dl>
+</div>
+
+
+

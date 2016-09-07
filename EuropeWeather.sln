@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EuropeWeather.Web", "EuropeWeather.Web\EuropeWeather.Web.csproj", "{F5204B42-74AC-40AE-BE0B-716BBEA244E6}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "EuropeWeather.Database", "EuropeWeather.Database\EuropeWeather.Database.sqlproj", "{9DBF711A-1E19-434F-9792-673358F15F39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EuropeWeather.DataAccess", "EuropeWeather.DataAccess\EuropeWeather.DataAccess.csproj", "{5D541EDD-6C68-44A9-983F-123A99813494}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EuropeWeather.Domain", "EuropeWeather.Domain\EuropeWeather.Domain.csproj", "{A84E4DB0-B479-4FB8-AF56-157D579EE783}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EuropeWeather.BusinessLogic", "EuropeWeather.BusinessLogic\EuropeWeather.BusinessLogic.csproj", "{54CF02E6-03B4-48D7-9172-1ACF41B3F32F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EuropeWeather.BusinessLogic.Test", "EuropeWeather.BusinessLogic.Test\EuropeWeather.BusinessLogic.Test.csproj", "{CB60E891-8590-4582-9D1E-0D0BE0F83117}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EuropeWeather.Integration.OpenWeatherMap", "EuropeWeather.Integration.OpenWeatherMap\EuropeWeather.Integration.OpenWeatherMap.csproj", "{75507A3B-426F-4F81-B679-0AA146ACB4FA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F5204B42-74AC-40AE-BE0B-716BBEA244E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5204B42-74AC-40AE-BE0B-716BBEA244E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5204B42-74AC-40AE-BE0B-716BBEA244E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5204B42-74AC-40AE-BE0B-716BBEA244E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DBF711A-1E19-434F-9792-673358F15F39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DBF711A-1E19-434F-9792-673358F15F39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DBF711A-1E19-434F-9792-673358F15F39}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{9DBF711A-1E19-434F-9792-673358F15F39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DBF711A-1E19-434F-9792-673358F15F39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DBF711A-1E19-434F-9792-673358F15F39}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{5D541EDD-6C68-44A9-983F-123A99813494}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D541EDD-6C68-44A9-983F-123A99813494}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D541EDD-6C68-44A9-983F-123A99813494}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D541EDD-6C68-44A9-983F-123A99813494}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A84E4DB0-B479-4FB8-AF56-157D579EE783}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A84E4DB0-B479-4FB8-AF56-157D579EE783}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A84E4DB0-B479-4FB8-AF56-157D579EE783}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A84E4DB0-B479-4FB8-AF56-157D579EE783}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54CF02E6-03B4-48D7-9172-1ACF41B3F32F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54CF02E6-03B4-48D7-9172-1ACF41B3F32F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54CF02E6-03B4-48D7-9172-1ACF41B3F32F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54CF02E6-03B4-48D7-9172-1ACF41B3F32F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB60E891-8590-4582-9D1E-0D0BE0F83117}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB60E891-8590-4582-9D1E-0D0BE0F83117}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB60E891-8590-4582-9D1E-0D0BE0F83117}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB60E891-8590-4582-9D1E-0D0BE0F83117}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75507A3B-426F-4F81-B679-0AA146ACB4FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75507A3B-426F-4F81-B679-0AA146ACB4FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75507A3B-426F-4F81-B679-0AA146ACB4FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75507A3B-426F-4F81-B679-0AA146ACB4FA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

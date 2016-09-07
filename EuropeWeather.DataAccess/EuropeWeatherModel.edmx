@@ -1,0 +1,375 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EuropeWeatherModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="EuropeWeatherModelStoreContainer">
+    <EntitySet Name="Cities" EntityType="EuropeWeatherModel.Store.Cities" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Countries" EntityType="EuropeWeatherModel.Store.Countries" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="WeatherConditions" EntityType="EuropeWeatherModel.Store.WeatherConditions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="WeatherData" EntityType="EuropeWeatherModel.Store.WeatherData" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="WeatherDataConditions" EntityType="EuropeWeatherModel.Store.WeatherDataConditions" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Cities_Countries" Association="EuropeWeatherModel.Store.FK_Cities_Countries">
+      <End Role="Countries" EntitySet="Countries" />
+      <End Role="Cities" EntitySet="Cities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WeatherData_Cities" Association="EuropeWeatherModel.Store.FK_WeatherData_Cities">
+      <End Role="Cities" EntitySet="Cities" />
+      <End Role="WeatherData" EntitySet="WeatherData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WeatherDataConditions_WeatherConditions" Association="EuropeWeatherModel.Store.FK_WeatherDataConditions_WeatherConditions">
+      <End Role="WeatherConditions" EntitySet="WeatherConditions" />
+      <End Role="WeatherDataConditions" EntitySet="WeatherDataConditions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WeatherDataConditions_WeatherData" Association="EuropeWeatherModel.Store.FK_WeatherDataConditions_WeatherData">
+      <End Role="WeatherData" EntitySet="WeatherData" />
+      <End Role="WeatherDataConditions" EntitySet="WeatherDataConditions" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Cities">
+    <Key>
+      <PropertyRef Name="CityId" />
+    </Key>
+    <Property Name="CityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CountryId" Type="int" Nullable="false" />
+    <Property Name="CityName" Type="nvarchar" Nullable="false" MaxLength="250" />
+    <Property Name="ExternalId" Type="int" Nullable="true" />
+    <Property Name="Longitude" Type="decimal" Nullable="true" Precision="9" Scale="6" />
+    <Property Name="Latitude" Type="decimal" Nullable="true" Precision="9" Scale="6" />
+  </EntityType>
+  <EntityType Name="Countries">
+    <Key>
+      <PropertyRef Name="CountryId" />
+    </Key>
+    <Property Name="CountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="250" />
+    <Property Name="Code2" Type="nvarchar" Nullable="false" MaxLength="2" />
+    <Property Name="Code3" Type="nvarchar" Nullable="true" MaxLength="3" />
+  </EntityType>
+  <EntityType Name="WeatherConditions">
+    <Key>
+      <PropertyRef Name="WeatherConditionId" />
+    </Key>
+    <Property Name="WeatherConditionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ExternalId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="WeatherData">
+    <Key>
+      <PropertyRef Name="WeatherDataId" />
+    </Key>
+    <Property Name="WeatherDataId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CityId" Type="int" Nullable="false" />
+    <Property Name="Temperature" Type="decimal" Nullable="true" Precision="5" Scale="2" />
+    <Property Name="Pressure" Type="decimal" Nullable="true" Precision="8" Scale="2" />
+    <Property Name="Humidity" Type="decimal" Nullable="true" Precision="5" Scale="2" />
+    <Property Name="MinTemperature" Type="decimal" Nullable="true" Precision="5" Scale="2" />
+    <Property Name="MaxTemperature" Type="decimal" Nullable="true" Precision="5" Scale="2" />
+    <Property Name="Visibility" Type="int" Nullable="true" />
+    <Property Name="WindSpeed" Type="decimal" Nullable="true" Precision="4" Scale="2" />
+    <Property Name="WindDirection" Type="decimal" Nullable="true" Precision="7" Scale="4" />
+    <Property Name="Clouds" Type="decimal" Nullable="true" Precision="5" Scale="2" />
+    <Property Name="Rain" Type="decimal" Nullable="true" Precision="10" Scale="2" />
+    <Property Name="Snow" Type="decimal" Nullable="true" Precision="10" Scale="2" />
+    <Property Name="Sunrise" Type="datetime" Nullable="true" />
+    <Property Name="Sunset" Type="datetime" Nullable="true" />
+    <Property Name="TimeOfCalculation" Type="datetime" Nullable="true" />
+    <Property Name="Created" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="WeatherDataConditions">
+    <Key>
+      <PropertyRef Name="WeatherDataConditionId" />
+    </Key>
+    <Property Name="WeatherDataConditionId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WeatherDataId" Type="bigint" Nullable="false" />
+    <Property Name="WeatherConditionId" Type="int" Nullable="false" />
+    <Property Name="WeatherMain" Type="nvarchar" Nullable="true" MaxLength="250" />
+    <Property Name="WeatherIcon" Type="varchar" Nullable="true" MaxLength="10" />
+  </EntityType>
+  <Association Name="FK_Cities_Countries">
+    <End Role="Countries" Type="EuropeWeatherModel.Store.Countries" Multiplicity="1" />
+    <End Role="Cities" Type="EuropeWeatherModel.Store.Cities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Countries">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="Cities">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WeatherData_Cities">
+    <End Role="Cities" Type="EuropeWeatherModel.Store.Cities" Multiplicity="1" />
+    <End Role="WeatherData" Type="EuropeWeatherModel.Store.WeatherData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cities">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="WeatherData">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WeatherDataConditions_WeatherConditions">
+    <End Role="WeatherConditions" Type="EuropeWeatherModel.Store.WeatherConditions" Multiplicity="1" />
+    <End Role="WeatherDataConditions" Type="EuropeWeatherModel.Store.WeatherDataConditions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WeatherConditions">
+        <PropertyRef Name="WeatherConditionId" />
+      </Principal>
+      <Dependent Role="WeatherDataConditions">
+        <PropertyRef Name="WeatherConditionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WeatherDataConditions_WeatherData">
+    <End Role="WeatherData" Type="EuropeWeatherModel.Store.WeatherData" Multiplicity="1" />
+    <End Role="WeatherDataConditions" Type="EuropeWeatherModel.Store.WeatherDataConditions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WeatherData">
+        <PropertyRef Name="WeatherDataId" />
+      </Principal>
+      <Dependent Role="WeatherDataConditions">
+        <PropertyRef Name="WeatherDataId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EuropeWeatherModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="CityName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ExternalId" Type="Int32" />
+          <Property Name="Longitude" Type="Decimal" Precision="9" Scale="6" />
+          <Property Name="Latitude" Type="Decimal" Precision="9" Scale="6" />
+          <NavigationProperty Name="Countries" Relationship="Self.FK_Cities_Countries" FromRole="Cities" ToRole="Countries" />
+          <NavigationProperty Name="WeatherData" Relationship="Self.FK_WeatherData_Cities" FromRole="Cities" ToRole="WeatherData" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Code2" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Code3" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cities" Relationship="Self.FK_Cities_Countries" FromRole="Countries" ToRole="Cities" />
+        </EntityType>
+        <EntityType Name="WeatherConditions">
+          <Key>
+            <PropertyRef Name="WeatherConditionId" />
+          </Key>
+          <Property Name="WeatherConditionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExternalId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="WeatherDataConditions" Relationship="EuropeWeatherModel.FK_WeatherDataConditions_WeatherConditions" FromRole="WeatherConditions" ToRole="WeatherDataConditions" />
+        </EntityType>
+        <EntityType Name="WeatherData">
+          <Key>
+            <PropertyRef Name="WeatherDataId" />
+          </Key>
+          <Property Name="WeatherDataId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityId" Type="Int32" Nullable="false" />
+          <Property Name="Temperature" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Pressure" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="Humidity" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="MinTemperature" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="MaxTemperature" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Visibility" Type="Int32" />
+          <Property Name="WindSpeed" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="WindDirection" Type="Decimal" Precision="7" Scale="4" />
+          <Property Name="Clouds" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Rain" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Snow" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Sunrise" Type="DateTime" Precision="2" />
+          <Property Name="Sunset" Type="DateTime" Precision="2" />
+          <Property Name="TimeOfCalculation" Type="DateTime" Precision="2" />
+          <Property Name="Created" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Cities" Relationship="Self.FK_WeatherData_Cities" FromRole="WeatherData" ToRole="Cities" />
+          <NavigationProperty Name="WeatherDataConditions" Relationship="EuropeWeatherModel.FK_WeatherDataConditions_WeatherData" FromRole="WeatherData" ToRole="WeatherDataConditions" />
+        </EntityType>
+        <Association Name="FK_Cities_Countries">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+          <End Role="Cities" Type="Self.Cities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="Cities">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WeatherData_Cities">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
+          <End Role="WeatherData" Type="Self.WeatherData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="WeatherData">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EuropeWeatherEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cities" EntityType="Self.Cities" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" />
+          <EntitySet Name="WeatherConditions" EntityType="Self.WeatherConditions" />
+          <EntitySet Name="WeatherData" EntityType="Self.WeatherData" />
+          <AssociationSet Name="FK_Cities_Countries" Association="Self.FK_Cities_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Cities" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WeatherData_Cities" Association="Self.FK_WeatherData_Cities">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="WeatherData" EntitySet="WeatherData" />
+          </AssociationSet>
+          <EntitySet Name="WeatherDataConditions" EntityType="EuropeWeatherModel.WeatherDataConditions" />
+          <AssociationSet Name="FK_WeatherDataConditions_WeatherConditions" Association="EuropeWeatherModel.FK_WeatherDataConditions_WeatherConditions">
+            <End Role="WeatherConditions" EntitySet="WeatherConditions" />
+            <End Role="WeatherDataConditions" EntitySet="WeatherDataConditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WeatherDataConditions_WeatherData" Association="EuropeWeatherModel.FK_WeatherDataConditions_WeatherData">
+            <End Role="WeatherData" EntitySet="WeatherData" />
+            <End Role="WeatherDataConditions" EntitySet="WeatherDataConditions" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="WeatherDataConditions">
+          <Key>
+            <PropertyRef Name="WeatherDataConditionId" />
+          </Key>
+          <Property Name="WeatherDataConditionId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WeatherDataId" Type="Int64" Nullable="false" />
+          <Property Name="WeatherConditionId" Type="Int32" Nullable="false" />
+          <Property Name="WeatherMain" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="WeatherIcon" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="WeatherConditions" Relationship="EuropeWeatherModel.FK_WeatherDataConditions_WeatherConditions" FromRole="WeatherDataConditions" ToRole="WeatherConditions" />
+          <NavigationProperty Name="WeatherData" Relationship="EuropeWeatherModel.FK_WeatherDataConditions_WeatherData" FromRole="WeatherDataConditions" ToRole="WeatherData" />
+        </EntityType>
+        <Association Name="FK_WeatherDataConditions_WeatherConditions">
+          <End Type="EuropeWeatherModel.WeatherConditions" Role="WeatherConditions" Multiplicity="1" />
+          <End Type="EuropeWeatherModel.WeatherDataConditions" Role="WeatherDataConditions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WeatherConditions">
+              <PropertyRef Name="WeatherConditionId" />
+            </Principal>
+            <Dependent Role="WeatherDataConditions">
+              <PropertyRef Name="WeatherConditionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WeatherDataConditions_WeatherData">
+          <End Type="EuropeWeatherModel.WeatherData" Role="WeatherData" Multiplicity="1" />
+          <End Type="EuropeWeatherModel.WeatherDataConditions" Role="WeatherDataConditions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WeatherData">
+              <PropertyRef Name="WeatherDataId" />
+            </Principal>
+            <Dependent Role="WeatherDataConditions">
+              <PropertyRef Name="WeatherDataId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EuropeWeatherModelStoreContainer" CdmEntityContainer="EuropeWeatherEntities">
+    <EntitySetMapping Name="Cities">
+      <EntityTypeMapping TypeName="IsTypeOf(EuropeWeatherModel.Cities)">
+        <MappingFragment StoreEntitySet="Cities">
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="ExternalId" ColumnName="ExternalId" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="IsTypeOf(EuropeWeatherModel.Countries)">
+        <MappingFragment StoreEntitySet="Countries">
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code2" ColumnName="Code2" />
+          <ScalarProperty Name="Code3" ColumnName="Code3" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WeatherConditions">
+      <EntityTypeMapping TypeName="IsTypeOf(EuropeWeatherModel.WeatherConditions)">
+        <MappingFragment StoreEntitySet="WeatherConditions">
+          <ScalarProperty Name="WeatherConditionId" ColumnName="WeatherConditionId" />
+          <ScalarProperty Name="ExternalId" ColumnName="ExternalId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WeatherData">
+      <EntityTypeMapping TypeName="IsTypeOf(EuropeWeatherModel.WeatherData)">
+        <MappingFragment StoreEntitySet="WeatherData">
+          <ScalarProperty Name="WeatherDataId" ColumnName="WeatherDataId" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="Temperature" ColumnName="Temperature" />
+          <ScalarProperty Name="Pressure" ColumnName="Pressure" />
+          <ScalarProperty Name="Humidity" ColumnName="Humidity" />
+          <ScalarProperty Name="MinTemperature" ColumnName="MinTemperature" />
+          <ScalarProperty Name="MaxTemperature" ColumnName="MaxTemperature" />
+          <ScalarProperty Name="Visibility" ColumnName="Visibility" />
+          <ScalarProperty Name="WindSpeed" ColumnName="WindSpeed" />
+          <ScalarProperty Name="WindDirection" ColumnName="WindDirection" />
+          <ScalarProperty Name="Clouds" ColumnName="Clouds" />
+          <ScalarProperty Name="Rain" ColumnName="Rain" />
+          <ScalarProperty Name="Snow" ColumnName="Snow" />
+          <ScalarProperty Name="Sunrise" ColumnName="Sunrise" />
+          <ScalarProperty Name="Sunset" ColumnName="Sunset" />
+          <ScalarProperty Name="TimeOfCalculation" ColumnName="TimeOfCalculation" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WeatherDataConditions">
+      <EntityTypeMapping TypeName="IsTypeOf(EuropeWeatherModel.WeatherDataConditions)">
+        <MappingFragment StoreEntitySet="WeatherDataConditions">
+          <ScalarProperty Name="WeatherDataConditionId" ColumnName="WeatherDataConditionId" />
+          <ScalarProperty Name="WeatherDataId" ColumnName="WeatherDataId" />
+          <ScalarProperty Name="WeatherConditionId" ColumnName="WeatherConditionId" />
+          <ScalarProperty Name="WeatherMain" ColumnName="WeatherMain" />
+          <ScalarProperty Name="WeatherIcon" ColumnName="WeatherIcon" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

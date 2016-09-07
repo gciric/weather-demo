@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4602e101f2de457a9c0e641c82105082" Name="Diagram1">
+        <EntityTypeShape EntityType="EuropeWeatherModel.Cities" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EuropeWeatherModel.Countries" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EuropeWeatherModel.WeatherConditions" Width="1.5" PointX="11.125" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EuropeWeatherModel.WeatherData" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="EuropeWeatherModel.FK_Cities_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="EuropeWeatherModel.FK_WeatherData_Cities" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EuropeWeatherModel.WeatherDataConditions" Width="1.5" PointX="7.5" PointY="2.5" />
+        <AssociationConnector Association="EuropeWeatherModel.FK_WeatherDataConditions_WeatherConditions" />
+        <AssociationConnector Association="EuropeWeatherModel.FK_WeatherDataConditions_WeatherData" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

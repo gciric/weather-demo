@@ -1,0 +1,118 @@
+﻿@using EuropeWeather.Web.Models.WeatherData
+@model WeatherDataModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Weather";
+}
+<h2>Weather data</h2>
+<p>
+    @Html.ActionLink("Get Latest data", "SyncWeather")
+</p>
+
+<h3>Search filters</h3>
+<hr />
+@using (Html.BeginForm("Index", "Weather", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <div class="row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(m => m.SelectedUnit, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(m => m.SelectedUnit, WeatherDataModel.Units, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(m => m.Cities, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.ListBoxFor(m => m.SelectedCities, Model.GetCities(), new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(m => m.From, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.From, new { @class = "form-control", type = "date", placeholder = "mm/dd/yyyy" })
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(m => m.To, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.To, new { @class = "form-control", type = "date", placeholder = "mm/dd/yyyy" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(m => m.SunriseFrom, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(m => m.SunriseFrom, new { @class = "form-control", type = "time", @placeholder = "hh:mm" })
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(m => m.SunriseTo, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(m => m.SunriseTo, new { @class = "form-control", type = "time", @placeholder = "hh:mm" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(m => m.SunsetFrom, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(m => m.SunsetFrom, new { @class = "form-control", type = "time", @placeholder = "hh:mm" })
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(m => m.SunsetTo, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(m => m.SunsetTo, new { @class = "form-control", type = "time", @placeholder = "hh:mm" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(m => m.MinTemperature, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(m => m.MinTemperature, new { @class = "form-control", type = "number", @placeholder = "deg. in selected unit" })
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(m => m.MaxTemperature, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(m => m.MaxTemperature, new { @class = "form-control", type = "number", @placeholder = "deg. in selected unit" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <div class="col-sm-offset-2 col-sm-10">
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.ShowLatestData) @Html.LabelFor(m => m.ShowLatestData)
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-6">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Refresh</button>
+            </div>
+        </div>
+    </div>
+}
+
+<hr />
+
+@if (Model.Results.Any())
+            {
+    <h3>Results</h3>
+    @Html.Partial("_WeatherGrid", Model)
+}
+@section Scripts {
+
+}

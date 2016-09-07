@@ -1,0 +1,127 @@
+﻿@using EuropeWeather.Web.Models.WeatherData
+@model WeatherDataModel
+<div class="table-responsive">
+    <table class="table table-hover">
+        <tr>
+            <th>
+                Country
+            </th>
+            <th>
+                City
+            </th>
+            <th>
+                Weather
+            </th>
+            <th>
+                Temperature <small>(@WeatherDataModel.TemperatureUnits[Model.SelectedUnit])</small>
+            </th>
+            <th>
+                Min. Temperature <small>(@WeatherDataModel.TemperatureUnits[Model.SelectedUnit])</small>
+            </th>
+            <th>
+                Max. Temperature <small>(@WeatherDataModel.TemperatureUnits[Model.SelectedUnit])</small>
+            </th>
+            <th>
+                Pressure <small>(hPa)</small>
+            </th>
+            <th>
+                Humidity <small>(%)</small>
+            </th>
+            <th>
+                Visibility <small>(meters)</small>
+            </th>
+            <th>
+                Wind Speed <small>(@WeatherDataModel.SpeedUnits[Model.SelectedUnit])</small>
+            </th>
+            <th>
+                Wind Direction <small>(degrees)</small>
+            </th>
+            <th>
+                Clouds <small>(%)</small>
+            </th>
+            <th>
+                Rain <small>(mm)</small>
+            </th>
+            <th>
+                Snow <small>(mm)</small>
+            </th>
+            <th>
+                Sunrise <small>(UTC)</small>
+            </th>
+            <th>
+                Sunset <small>(UTC)</small>
+            </th>
+            <th>
+                Time <small>(UTC)</small>
+            </th>
+        </tr>
+
+        @foreach (var item in Model.Results)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City.Country.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City.Name)
+                </td>
+                <td>
+                    <dl class="dl-horizontal">
+                        @foreach (var condition in item.Conditions)
+                        {
+                            <dt class="left">
+                                @condition.WeatherCondition.Name
+                            </dt>
+                            <dd>
+                                <img src="http://openweathermap.org/img/w/@(condition.Icon).png" alt="@condition.Main" />
+                            </dd>
+                        }
+                    </dl>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Temperature)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MinTemperature)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaxTemperature)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pressure)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Humidity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Visibility)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WindSpeed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WindDirection)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Clouds)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rain)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Snow)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sunrise)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sunset)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TimeOfCalculation)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
