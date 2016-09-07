@@ -9,6 +9,7 @@ CREATE TABLE [dbo].[WeatherDataConditions] (
     CONSTRAINT [FK_WeatherDataConditions_WeatherData] FOREIGN KEY ([WeatherDataId]) REFERENCES [dbo].[WeatherData] ([WeatherDataId])
 );
 
+GO
 
 CREATE NONCLUSTERED INDEX [IX_FK_WeatherDataConditions_WeatherData]
     ON [dbo].[WeatherDataConditions]([WeatherDataId] ASC);
