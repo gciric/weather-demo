@@ -13,7 +13,7 @@ CREATE TABLE [dbo].[Cities] (
 GO
 
 
-GO
+
 CREATE NONCLUSTERED INDEX [IX_FK_Cities_Countries]
     ON [dbo].[Cities]([CountryId] ASC);
-
+GO

@@ -23,7 +23,7 @@ CREATE TABLE [dbo].[WeatherData] (
 
 GO
 
-GO
 CREATE NONCLUSTERED INDEX [IX_FK_WeatherData_Cities]
     ON [dbo].[WeatherData]([CityId] ASC);
+GO
 

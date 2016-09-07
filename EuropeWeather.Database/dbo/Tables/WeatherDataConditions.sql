@@ -10,20 +10,6 @@ CREATE TABLE [dbo].[WeatherDataConditions] (
 );
 
 
-
-GO
-
-
-GO
-
-
-GO
-
-
-GO
-
-
-GO
 CREATE NONCLUSTERED INDEX [IX_FK_WeatherDataConditions_WeatherData]
     ON [dbo].[WeatherDataConditions]([WeatherDataId] ASC);
 
@@ -31,4 +17,5 @@ CREATE NONCLUSTERED INDEX [IX_FK_WeatherDataConditions_WeatherData]
 GO
 CREATE NONCLUSTERED INDEX [IX_FK_WeatherDataConditions_WeatherConditions]
     ON [dbo].[WeatherDataConditions]([WeatherConditionId] ASC);
+GO
 
