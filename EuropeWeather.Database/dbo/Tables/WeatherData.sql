@@ -1,27 +1,29 @@
-﻿CREATE TABLE [dbo].[WeatherData](
-	[WeatherDataId] [bigint] IDENTITY(1,1) NOT NULL,
-	[CityId] [int] NOT NULL,
-	[Temperature] [decimal](5, 2) NULL,
-	[Pressure] [decimal](8, 2) NULL,
-	[Humidity] [decimal](5, 2) NULL,
-	[MinTemperature] [decimal](5, 2) NULL,
-	[MaxTemperature] [decimal](5, 2) NULL,
-	[Visibility] [int] NULL,
-	[WindSpeed] [decimal](4, 2) NULL,
-	[WindDirection] [decimal](7, 4) NULL,
-	[Clouds] [decimal](5, 2) NULL,
-	[Rain] [decimal](10, 2) NULL,
-	[Snow] [decimal](10, 2) NULL,
-	[Sunrise] [datetime2](2) NULL,
-	[Sunset] [datetime2](2) NULL,
-	[TimeOfCalculation] [datetime2](2) NULL,
-	[Created] [datetime2](7) NULL,
- CONSTRAINT [PK_WeatherData] PRIMARY KEY CLUSTERED 
-(
-	[WeatherDataId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
-)
+CREATE TABLE [dbo].[WeatherData] (
+    [WeatherDataId]     BIGINT          IDENTITY (1, 1) NOT NULL,
+    [CityId]            INT             NOT NULL,
+    [Temperature]       DECIMAL (5, 2)  NULL,
+    [Pressure]          DECIMAL (8, 2)  NULL,
+    [Humidity]          DECIMAL (5, 2)  NULL,
+    [MinTemperature]    DECIMAL (5, 2)  NULL,
+    [MaxTemperature]    DECIMAL (5, 2)  NULL,
+    [Visibility]        INT             NULL,
+    [WindSpeed]         DECIMAL (4, 2)  NULL,
+    [WindDirection]     DECIMAL (7, 4)  NULL,
+    [Clouds]            DECIMAL (5, 2)  NULL,
+    [Rain]              DECIMAL (10, 2) NULL,
+    [Snow]              DECIMAL (10, 2) NULL,
+    [Sunrise]           DATETIME2 (2)   NULL,
+    [Sunset]            DATETIME2 (2)   NULL,
+    [TimeOfCalculation] DATETIME2 (2)   NULL,
+    [Created]           DATETIME2 (7)   NULL,
+    CONSTRAINT [PK_WeatherData] PRIMARY KEY CLUSTERED ([WeatherDataId] ASC),
+    CONSTRAINT [FK_WeatherData_Cities] FOREIGN KEY ([CityId]) REFERENCES [dbo].[Cities] ([CityId])
+);
+
+
 GO
-ALTER TABLE [dbo].[WeatherData] ADD  CONSTRAINT [FK_WeatherData_Cities] FOREIGN KEY([CityId])
-REFERENCES [dbo].[Cities] ([CityId])
+
 GO
+CREATE NONCLUSTERED INDEX [IX_FK_WeatherData_Cities]
+    ON [dbo].[WeatherData]([CityId] ASC);
+

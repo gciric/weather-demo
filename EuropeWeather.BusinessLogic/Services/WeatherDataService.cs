@@ -15,6 +15,7 @@ namespace EuropeWeather.BusinessLogic.Services
 {
     public class WeatherDataService : IWeatherDataService
     {
+        private const int MAX_RESULTS = 100;
 
         public async Task<bool> ImportWeatherData(string url, string apiKey)
         {
@@ -142,7 +143,7 @@ namespace EuropeWeather.BusinessLogic.Services
             }
         }
 
-        public async Task<IEnumerable<IWeatherData>> SearchWeatherData(IEnumerable<int> cities = null,
+        public async Task<Tuple<IEnumerable<IWeatherData>,int>> SearchWeatherData(IEnumerable<int> cities = null,
             TimeSpan? sunsetFrom = null, TimeSpan? sunsetTo = null, TimeSpan? sunriseFrom = null,
             TimeSpan? sunriseTo = null, DateTime? from = null, DateTime? to = null, int? minTemp = null,
             int? maxTemp = null)
@@ -212,19 +213,21 @@ namespace EuropeWeather.BusinessLogic.Services
                     filter = filter.Where(w => w.Temperature.HasValue && w.Temperature.Value <= maxTemp);
                 }
 
+               var count = filter.Count();
 
                 var weatherData =
                     await
                         filter.OrderBy(w => w.Cities.Countries.Name)
                             .ThenByDescending(w => w.Created)
+                            .Take(MAX_RESULTS)
                             .ToListAsync();
                 var mapper = new WeatherDataToWeatherDataDtoMapping(context);
-                return weatherData.Select(w => mapper.To(w)).ToList();
+                return new Tuple<IEnumerable<IWeatherData>, int>(weatherData.Select(w => mapper.To(w)).ToList(), count);
             }
 
         }
 
-        public async Task<IEnumerable<IWeatherData>> GetLatestWeatherData(IEnumerable<int> cities = null,
+        public async Task<Tuple<IEnumerable<IWeatherData>, int>> GetLatestWeatherData(IEnumerable<int> cities = null,
             TimeSpan? sunsetFrom = null, TimeSpan? sunsetTo = null, TimeSpan? sunriseFrom = null,
             TimeSpan? sunriseTo = null, DateTime? from = null, DateTime? to = null, int? minTemp = null,
             int? maxTemp = null)
@@ -319,10 +322,11 @@ namespace EuropeWeather.BusinessLogic.Services
                     filter = filter.Where(w => w.Temperature.HasValue && w.Temperature.Value <= maxTemp);
                 }
 
-                var weatherData = await filter.OrderBy(w => w.Cities.Countries.Name).ToListAsync();
+                var count = filter.Count();
+                var weatherData = await filter.OrderBy(w => w.Cities.Countries.Name).Take(MAX_RESULTS).ToListAsync();
 
                 var mapper = new WeatherDataToWeatherDataDtoMapping(context);
-                return weatherData.Select(w => mapper.To(w)).ToList();
+                return new Tuple<IEnumerable<IWeatherData>, int>(weatherData.Select(w => mapper.To(w)).ToList(), count);
             }
         }
 

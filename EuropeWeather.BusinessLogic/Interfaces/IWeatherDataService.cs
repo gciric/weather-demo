@@ -14,10 +14,10 @@ namespace EuropeWeather.BusinessLogic.Interfaces
         Task<IEnumerable<ICity>> GetCities();
         Task<ICity> GetCity(int cityId);
         Task<IEnumerable<IWeatherData>> GetWeatherDataForDate(DateTime date);
-        Task<IEnumerable<IWeatherData>> SearchWeatherData(IEnumerable<int> cities = null, TimeSpan? sunsetFrom = null,
+        Task<Tuple<IEnumerable<IWeatherData>, int>> SearchWeatherData(IEnumerable<int> cities = null, TimeSpan? sunsetFrom = null,
             TimeSpan? sunsetTo = null, TimeSpan? sunriseFrom = null, TimeSpan? sunriseTo = null, DateTime? from = null,
             DateTime? to = null, int? minTemp = null, int? maxTemp = null);
-        Task<IEnumerable<IWeatherData>> GetLatestWeatherData(IEnumerable<int> cities = null, TimeSpan? sunsetFrom = null,
+        Task<Tuple<IEnumerable<IWeatherData>, int>> GetLatestWeatherData(IEnumerable<int> cities = null, TimeSpan? sunsetFrom = null,
             TimeSpan? sunsetTo = null, TimeSpan? sunriseFrom = null, TimeSpan? sunriseTo = null, DateTime? from = null,
             DateTime? to = null, int? minTemp = null, int? maxTemp = null);
     }

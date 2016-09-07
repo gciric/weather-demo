@@ -48,8 +48,8 @@ namespace EuropeWeather.Web.Controllers
             {
                 if (model.SelectedUnit != Measurements.Default) Session.Add("unit", model.SelectedUnit);
             }
-            
 
+            Tuple<IEnumerable<IWeatherData>, int> tuple;
             IEnumerable<IWeatherData> weatherData;
             if (model.SelectedCities?.Any() ?? false)
             {
@@ -57,7 +57,7 @@ namespace EuropeWeather.Web.Controllers
             }
             if (model.ShowLatestData)
             {
-                weatherData =
+                tuple =
                     await
                         _dataService.GetLatestWeatherData(model.SelectedCities, model.SunsetFrom, model.SunsetTo,
                             model.SunriseFrom, model.SunriseTo, model.From, model.To, model.MinTemperatureInK(),
@@ -65,12 +65,14 @@ namespace EuropeWeather.Web.Controllers
             }
             else
             {
-                weatherData =
+                tuple =
                     await
                         _dataService.SearchWeatherData(model.SelectedCities, model.SunsetFrom, model.SunsetTo,
                             model.SunriseFrom, model.SunriseTo, model.From, model.To, model.MinTemperatureInK(),
                             model.MaxTemperatureInK());
             }
+            weatherData = tuple.Item1;
+            model.TotalResults = tuple.Item2;
 
             model.Results = weatherData.ToList();
 

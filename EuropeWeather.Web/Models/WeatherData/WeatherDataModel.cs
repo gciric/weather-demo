@@ -38,6 +38,7 @@ namespace EuropeWeather.Web.Models.WeatherData
         public bool ShowLatestData { get; set; }
 
         public IEnumerable<IWeatherData> Results { get; set; }
+        public int TotalResults { get; set; }
 
         [DisplayName("Units")]
         public Measurements SelectedUnit { get; set; }

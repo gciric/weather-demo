@@ -111,7 +111,9 @@
 @if (Model.Results.Any())
             {
     <h3>Results</h3>
+    <p>Showing first <strong>@Model.Results.Count()</strong> of <strong>@Model.TotalResults</strong></p>
     @Html.Partial("_WeatherGrid", Model)
+    
 }
 @section Scripts {
 
